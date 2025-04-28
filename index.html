@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            margin: 0;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        input[type="number"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin: 10px;
+            width: 150px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #ff5f6d;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ffc371;
+            color: #000;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="game-container">
+    <h1>Number Guessing Game</h1>
+    <p>Guess a number between 1 and 100</p>
+    <input type="number" id="guessInput" placeholder="Enter your guess">
+    <br>
+    <button onclick="checkGuess()">Guess</button>
+    <div class="message" id="message"></div>
+</div>
+
+<script>
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    let attempts = 0;
+
+    function checkGuess() {
+        const guess = parseInt(document.getElementById('guessInput').value);
+        const message = document.getElementById('message');
+        attempts++;
+
+        if (isNaN(guess)) {
+            message.textContent = "Please enter a valid number!";
+        } else if (guess < randomNumber) {
+            message.textContent = "Too low! Try again.";
+        } else if (guess > randomNumber) {
+            message.textContent = "Too high! Try again.";
+        } else {
+            message.innerHTML = `🎉 Congratulations! You guessed it in <strong>${attempts}</strong> attempts!`;
+            document.querySelector('button').disabled = true;
+        }
+    }
+</script>
+
+</body>
+</html>
